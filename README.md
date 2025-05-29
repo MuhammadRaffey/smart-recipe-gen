@@ -26,7 +26,7 @@ A conversational AI app built with [Chainlit](https://www.chainlit.io/) that gen
 1. **Clone the repository:**
 
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/MuhammadRaffey/smart-recipe-gen
    cd smart-recipe-gen
    ```
 
