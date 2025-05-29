@@ -10,6 +10,7 @@ A conversational AI app built with [Chainlit](https://www.chainlit.io/) that gen
 - **Streaming Responses:** Recipes are streamed live, so you see the answer as it's generated.
 - **Web Search Tool:** Optionally leverages web search for more creative or up-to-date recipes.
 - **Friendly, Emoji-Rich UX:** All messages are enhanced with relevant emojis and clear, friendly language.
+- **Powered by OpenAI Agents SDK:** Utilizes the [OpenAI Agents SDK](https://github.com/openai/openai-agents) for agent orchestration, streaming, and guardrails.
 
 ---
 
@@ -20,6 +21,7 @@ A conversational AI app built with [Chainlit](https://www.chainlit.io/) that gen
 - Python 3.11+
 - [uv](https://github.com/astral-sh/uv) (for dependency management)
 - OpenAI API key (for LLM access)
+- [OpenAI Agents SDK](https://github.com/openai/openai-agents) (installed automatically via `pyproject.toml`)
 
 ### Installation
 
@@ -30,7 +32,7 @@ A conversational AI app built with [Chainlit](https://www.chainlit.io/) that gen
    cd smart-recipe-gen
    ```
 
-2. **Install dependencies:**
+2. **Install dependencies (including Chainlit and OpenAI Agents SDK):**
 
    ```sh
    uv sync
@@ -72,6 +74,19 @@ A conversational AI app built with [Chainlit](https://www.chainlit.io/) that gen
 
 ---
 
+## OpenAI Agents SDK
+
+This project is built on top of the [OpenAI Agents SDK](https://github.com/openai/openai-agents), which provides:
+
+- Agent orchestration and workflow management
+- Streaming LLM responses
+- Guardrails for input and output validation
+- Easy integration with OpenAI models and tools
+
+For more information, see the [OpenAI Agents SDK documentation](https://github.com/openai/openai-agents).
+
+---
+
 ## Contributing
 
 1. Fork the repo and create your feature branch (`git checkout -b feature/your-feature`)
@@ -91,3 +106,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 - [Chainlit](https://www.chainlit.io/) for the conversational UI framework
 - [OpenAI](https://openai.com/) for the LLM backend
+- [OpenAI Agents SDK](https://github.com/openai/openai-agents) for agent orchestration and streaming
