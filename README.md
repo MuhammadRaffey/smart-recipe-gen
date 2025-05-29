@@ -74,6 +74,51 @@ A conversational AI app built with [Chainlit](https://www.chainlit.io/) that gen
 
 ---
 
+## Using Google Gemini as the Model Provider
+
+You can switch the model provider from OpenAI to Google Gemini by following these steps:
+
+1. **Get a Gemini API Key:**
+
+   - Obtain your Gemini API key from Google and add it to your `.env` file:
+     ```env
+     GEMINI_API_KEY=your-gemini-api-key
+     ```
+
+2. **Update `setup_config.py`:**
+   Replace the OpenAI client and model setup with the following code:
+
+   ```python
+   import os
+   from agents import AsyncOpenAI, OpenAIChatCompletionsModel, RunConfig
+
+   gemini_api_key = os.getenv("GEMINI_API_KEY")
+
+   # Check if the API key is present; if not, raise an error
+   if not gemini_api_key:
+       raise ValueError("GEMINI_API_KEY is not set. Please ensure it is defined in your .env file.")
+
+   client = AsyncOpenAI(
+       api_key=gemini_api_key,
+       base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+   )
+
+   model = OpenAIChatCompletionsModel(
+       model="gemini-2.0-flash",
+       openai_client=client
+   )
+
+   config = RunConfig(
+       model=model,
+       model_provider=client
+   )
+   ```
+
+3. **Restart the app:**
+   - After making these changes, restart the Chainlit app to use Gemini as the backend.
+
+---
+
 ## OpenAI Agents SDK
 
 This project is built on top of the [OpenAI Agents SDK](https://github.com/openai/openai-agents), which provides:
