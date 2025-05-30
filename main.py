@@ -2,13 +2,14 @@ from agents import (
     Agent,
     WebSearchTool,
     Runner,
-    RunConfig
+    RunConfig,
+    set_trace_processors
 )
 from typing import cast
 from ingredients_guardrails import ingredients_guardrail
 import chainlit as cl
 from setup_config import config
-
+from langsmith.wrappers import OpenAIAgentsTracingProcessor
 
 
 @cl.on_chat_start
@@ -41,6 +42,7 @@ async def main(message: cl.Message):
     history.append({"role": "user", "content": message.content})
 
     try:
+        set_trace_processors([OpenAIAgentsTracingProcessor()])
         result = Runner.run_streamed(
             starting_agent=agent,
             input=history,
