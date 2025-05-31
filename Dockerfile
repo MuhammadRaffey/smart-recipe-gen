@@ -1,27 +1,15 @@
 # syntax=docker/dockerfile:1
 FROM python:3.11-slim
 
-# Update system packages and install uv (fast Python package manager)
-RUN apt-get update && apt-get upgrade -y \
-    && pip install --no-cache-dir uv \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set work directory
+# Install uv + project deps
+RUN pip install --no-cache-dir uv
 WORKDIR /app
-
-# Copy project files
 COPY . .
-
-# Install dependencies
 RUN uv sync
 
-# Expose default Chainlit port (change if needed)
-EXPOSE 8000
+EXPOSE 8000         # only matters for local docker use
 
-# Set environment variables (optional, can be overridden at runtime)
-# ENV OPENAI_API_KEY=your-key-here
-# ENV GEMINI_API_KEY=your-gemini-api-key
-
-# Default command
-CMD ["uv", "run", "chainlit", "run", "./main.py", "-h"] 
+# ----  ⬇️  critical change  ⬇️  ----
+# -h  : headless   --host 0.0.0.0 : bind to all IFs
+# --port ${PORT:-8000} : use Railway’s $PORT if it exists, else 8000 (local)
+CMD ["sh", "-c", "chainlit run main.py -h --host 0.0.0.0 --port ${PORT:-8000}"]
