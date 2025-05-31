@@ -16,9 +16,6 @@ COPY . .
 # Install dependencies
 RUN uv sync
 
-# Copy .env file if present (for local dev, override at runtime for prod)
-COPY .env .env
-
 # Expose default Chainlit port (change if needed)
 EXPOSE 8000
 
